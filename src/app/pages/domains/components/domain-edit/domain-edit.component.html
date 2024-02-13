@@ -1,0 +1,6 @@
+<!-- Title page component -->
+<app-title-page title="Modifier le domaine : {{domain.name}}" ></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+<!-- Form Component -->
+<app-domain-form (newDomainEvent)="editDomain($event)" [domain]="domain"></app-domain-form>

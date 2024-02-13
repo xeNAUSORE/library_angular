@@ -1,0 +1,28 @@
+<mat-card>
+    <form (ngSubmit)="onSubmit()" [formGroup]="domainForm" #formDir="ngForm">
+        <mat-card-content class="form-input-container">
+            <mat-form-field >
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="name" required>
+                <!-- error message -->
+                <mat-error  *ngIf="name != null && name.invalid && (name.dirty || name.touched)">
+                    <span *ngIf="name.errors?.['required']">Le nom est requis.</span>
+                    <span *ngIf="name.errors?.['minlength']">
+                        le nom doit contenir au moins 2 caractères.
+                    </span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" name="description"></textarea>
+            </mat-form-field>
+        </mat-card-content>
+
+        <mat-divider></mat-divider>
+
+        <mat-card-actions class="card-actions">
+            <button mat-raised-button type="submit" color="primary" [disabled]="domainForm.invalid">Valider</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

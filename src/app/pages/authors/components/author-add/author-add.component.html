@@ -1,0 +1,6 @@
+<!-- Title page component -->
+<app-title-page title="Ajouter un auteur" ></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+<!-- Form Component -->
+<app-author-form (newAuthorEvent)="addAuthor($event)"></app-author-form>

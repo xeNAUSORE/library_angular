@@ -1,0 +1,25 @@
+<!-- Title page component -->
+<app-title-page title="Emprunt: {{rental.book.title}} - {{rental.user.firstname}} {{rental.user.lastname}}"></app-title-page>
+
+<!-- User View-->
+<mat-card>
+    <mat-card-header class="card-header">
+        <mat-card-title>{{rental.book.title}} | {{rental.book.author?.firstname}} {{rental.book.author?.lastname }}</mat-card-title>
+        <mat-card-subtitle  class="card-subtitle">
+            {{rental.user.firstname}} {{rental.user.lastname}} |
+            <mat-icon>arrow_back</mat-icon>{{rental.rentAt | date:'dd/MM/YYYY'}} | 
+            <mat-icon>arrow_forward</mat-icon>
+            <span *ngIf="rental.returnAt; else hasReturnDate">{{rental.returnAt}}</span>
+            <ng-template #hasReturnDate>
+                en attente
+            </ng-template>
+        </mat-card-subtitle >
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions align="end" class="card-actions">  
+        <a mat-raised-button *ngIf="!rental.returnAt" color="primary" (click)="openConfirmDialog(rental)">Retourner</a>
+        <a mat-raised-button color="primary" routerLink="/rentals/edit/{{rental.id}}">Editer</a>
+    </mat-card-actions>
+</mat-card>

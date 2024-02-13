@@ -1,0 +1,35 @@
+
+.mat-mdc-list-item:not(:last-child) { border-bottom: 1px solid rgba(0, 0, 0, 0.12);}
+
+.header-list {
+    display: flex;
+    justify-content: flex-end;
+    padding:0px 0px 10px 0px; 
+}
+
+.list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .subtitle {
+        display:flex;
+        align-items: center;
+
+        font-size:12px;
+        color:rgba(0,0,0,0.5);
+
+        .mat-icon { 
+            font-size: 15px; 
+            width: 15px; 
+            display: flex; 
+            align-items: center;
+        }
+    }
+
+    .list-items-right {
+        display: flex;
+        align-items: center;
+    }
+}

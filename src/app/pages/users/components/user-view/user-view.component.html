@@ -1,0 +1,30 @@
+<!-- Title page component -->
+<app-title-page title="Lecteur: {{user.firstname}} {{user.lastname}}"></app-title-page>
+
+<!-- User View-->
+<mat-card>
+    <mat-card-header class="card-header">
+        <mat-card-title>{{user.firstname}} {{user.lastname}}</mat-card-title>
+        <mat-card-subtitle class="card-subtitle">{{user.mail}} | {{user.phone}}</mat-card-subtitle>
+        <mat-card-subtitle class="card-subtitle">
+            {{user.address.number}} 
+            {{user.address.street}} 
+            {{user.address.apt}} 
+            {{user.address.city}} 
+            {{user.address.zip}} 
+            {{user.address.country}}
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions align="end" class="card-actions">  
+        <a mat-raised-button color="primary" routerLink="/users/edit/{{user.id}}">Editer</a>
+    </mat-card-actions>
+</mat-card>
+
+
+<!-- Title page component -->
+<app-title-page title="Liste des empruns du lecteur"></app-title-page>
+<!-- Rentals list component-->
+<app-rental-list *ngIf="userRentals.length > 0" [rentals]="userRentals"></app-rental-list>

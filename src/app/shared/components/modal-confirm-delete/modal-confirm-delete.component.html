@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Supprimer {{title}}</h2>
+<mat-dialog-content>
+	<p>êtes vous sure de vouloir supprimer: <b>{{message}}</b> ?</p>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="center">
+	<button mat-raised-button color="warn" (click)="onConfirmClick()" tabindex="1">Supprimer</button>
+	<button mat-raised-button mat-dialog-close tabindex="-1">Annuler</button>
+</mat-dialog-actions>

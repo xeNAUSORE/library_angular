@@ -1,0 +1,16 @@
+.card-actions a { margin-left:20px; }
+.card-header { margin-bottom: 20px;}
+.card-subtitle { 
+    display: flex; 
+    align-items: center; 
+
+    font-size:12px;
+    color:rgba(0,0,0,0.5);
+
+    .mat-icon { 
+        font-size: 15px; 
+        width: 15px; 
+        display: flex; 
+        align-items: center;
+    }
+}

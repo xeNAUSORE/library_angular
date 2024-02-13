@@ -1,0 +1,6 @@
+<!-- Title page component -->
+<app-title-page title="Modifier l'utilisateur : {{user.firstname}} {{user.lastname}}" ></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+<!-- Form Component -->
+<app-user-form (newUserEvent)="editUser($event)" [user]="user"></app-user-form>

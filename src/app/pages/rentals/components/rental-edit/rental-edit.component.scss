@@ -1,0 +1,12 @@
+.rent-date-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin:20px 0;
+    padding:0 20px;
+
+    .rent-date {
+        display: flex;
+        align-items: center;
+    }
+}
