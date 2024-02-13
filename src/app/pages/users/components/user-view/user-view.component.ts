@@ -66,7 +66,7 @@ export class UserViewComponent implements OnDestroy, OnInit {
 					id:1, 
 					title:"ça", 
 					description:'', 
-					author: { id:1, firstname:'Stephen', lastname:'King', mail:'', phone:'', books:null },
+					author: { id:1, firstname:'Stephen', lastname:'King', email:'', phone:'', books:null, grade:'' },
 					domain: { id:1, name:'Science Fiction', description:'', books:null} ,
 					rentals: null
 				} ,

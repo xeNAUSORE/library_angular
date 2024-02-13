@@ -34,8 +34,8 @@ export class BookFormComponent implements OnInit, OnDestroy {
 	private authorSubscription!: Subscription
 	private domainSubscription!: Subscription
 	authors: Author[] = [
-		{ id:1, firstname:'stephen', lastname:'king', mail:'', phone:'', books:null },
-		{ id:2, firstname:'mc', lastname:'skyze', mail:'', phone:'', books:null }
+		{ id:1, firstname:'stephen', lastname:'king', email:'', grade:'', phone:'', books:null },
+		{ id:2, firstname:'mc', lastname:'skyze',email:'', grade:'', phone:'', books:null }
 	]
 	domains: Domain[] = [
 		{id: 1, name:'Science fiction', description:'', books:null },

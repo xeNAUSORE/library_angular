@@ -4,7 +4,8 @@ export interface Author {
     id:number,
     firstname: string,
     lastname: string,
-    mail: string,
+    email: string,
     phone: string,
+    grade: string,
     books: Book[] | null
 }

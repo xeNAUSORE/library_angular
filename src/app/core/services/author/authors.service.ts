@@ -18,6 +18,6 @@ export class AuthorsService {
 	getAuthorList(): Observable<Author[]> { return this.http.get<Author[]>(`${this.baseUrl}/authors`) }
 	getAuthor(id: number): Observable<Author> { return this.http.get<Author>(`${this.baseUrl}/authors/${id}`) }
 	createAuthor(author: Author): Observable<Author> { return this.http.post<Author>(`${this.baseUrl}/authors`, author) }
-	editAuthor(author: Author): Observable<Author> { return this.http.put<Author>(`${this.baseUrl}/authors`, author) }
+	editAuthor(author: Author): Observable<Author> { return this.http.put<Author>(`${this.baseUrl}/authors/${author.id}`, author) }
 	deleteAuthor(id: number): Observable<boolean> { return this.http.delete<boolean>(`${this.baseUrl}/authors/${id}`) }
 }

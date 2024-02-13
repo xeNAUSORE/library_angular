@@ -22,10 +22,11 @@ import { Author } from '../../../../shared/models/author';
 
 export class AuthorEditComponent implements OnInit, OnDestroy {
 	// Properties
+	isDataLoaded: boolean = false
 	hasError: boolean = false
 	private authorSubscription!: Subscription
 	//pour test sans API
-	author: Author = { id:1, firstname:'stephen', lastname:'king', mail:'mail@gmail.com', phone:'', books:null}
+	author!: Author
 
 	constructor(private authorsService: AuthorsService, private router: Router, private activatedRoute: ActivatedRoute){}
 
@@ -36,11 +37,14 @@ export class AuthorEditComponent implements OnInit, OnDestroy {
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
 		if(paramId == null) this.router.navigateByUrl('/authors')
 		else {
-			// const id = parseInt(paramId)
-			// this.authorSubscription = this.authorsService.getAuthor(id).subscribe({
-			// 	next: (data) => { this.author = data },
-			// 	error: (err) => { this.router.navigateByUrl('/authors') }
-			// })
+			const id = parseInt(paramId)
+			this.authorSubscription = this.authorsService.getAuthor(id).subscribe({
+				next: (data) => { 
+					this.author = data 
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/authors') }
+			})
 		}
 	}
 

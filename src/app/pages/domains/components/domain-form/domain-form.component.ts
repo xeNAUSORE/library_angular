@@ -60,7 +60,7 @@ export class DomainFormComponent implements OnInit, OnDestroy {
 	onSubmit(){
 		let d = {  }
 		if(this.domain) d = { id:this.domain.id }
-		d = { ...d, name: this.domainForm.get('name'), description: this.domainForm.get('description') }
+		d = { ...d, name: this.domainForm.get('name')?.value, description: this.domainForm.get('description')?.value }
 
 		//Emit l'objet au component parent
 		this.newDomainEvent.emit(d)

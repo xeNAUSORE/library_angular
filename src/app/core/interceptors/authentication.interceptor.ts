@@ -7,7 +7,7 @@ import { AuthService } from "../services/authentication/auth.service"
 
 export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
 	const authService = inject(AuthService);
-	let token = authService.getToken();
+	let token = null //authService.getToken();
 
 	if (token) {
 		token = `Bearer ${token}`

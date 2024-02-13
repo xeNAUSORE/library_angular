@@ -29,24 +29,9 @@ import { AuthorsService } from '../../../../core/services/author/authors.service
 export class AuthorViewComponent implements OnDestroy, OnInit {
 	////////////////////////////////////////
 	// Properties
-	author: Author = {
-		id:1,
-		firstname:'stephen',
-		lastname: 'king',
-		mail: 'stephenking@gmail.com',
-		phone: '',
-		books: [
-			{ 
-				id:1, 
-				title:'Star wars', 
-				description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum, erat non gravida faucibus, diam nisl aliquam quam, eu lacinia elit purus nec eros. Proin eget vulputate lectus.',
-				author: { id:1, firstname:'Stephen', lastname:'King', mail:'', phone:'', books:null },
-				rentals: null,
-				domain: { id:1, name:'Science fiction', description:'', books:null}
-			}
-		]
-	}
-	authorBooks: Book[] = this.author.books ?? []
+	isDataLoaded: boolean = false
+	author!: Author 
+	authorBooks: Book[] = this.author?.books ?? []
 	
 	private authorSubscription!: Subscription
 
@@ -59,11 +44,14 @@ export class AuthorViewComponent implements OnDestroy, OnInit {
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
 		if(paramId == null) this.router.navigateByUrl('/authors')
 		else {
-			// const id = parseInt(paramId)
-			// this.authorSubscription = this.authorsService.getAuthor(id).subscribe({
-			// 	next: (data) => {  this.author = data },
-			// 	error: (err) => { this.router.navigateByUrl('/domains') }
-			// })
+			const id = parseInt(paramId)
+			this.authorSubscription = this.authorsService.getAuthor(id).subscribe({
+				next: (data) => {  
+					this.author = data 
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/domains') }
+			})
 		}
 	}
 	ngOnDestroy(): void{
