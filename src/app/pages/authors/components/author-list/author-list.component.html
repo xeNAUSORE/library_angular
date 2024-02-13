@@ -1,0 +1,25 @@
+<app-title-page title="Liste des auteurs" [hasAddBtn]="true" linkBtn="/authors/add"></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+<!-- Search Component -->
+<app-search (newSearchEvent)="searchAuthor($event)"></app-search>
+
+<mat-card>
+    <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let a of authors | search: searchText">
+            <div *ngIf="a.noresult; else hasResult">{{a.noresult}}</div>
+            <ng-template #hasResult>
+                <div class="list-item">
+                    <span>{{a.firstname}} {{a.lastname}}</span>
+                    
+                    <div class="list-items-right">
+                        <!-- <mat-chip><mat-icon matChipAvatar>library_books</mat-icon> {{ a.books?.length }} livre(s)</mat-chip> -->
+                        <a mat-icon-button color="primary" routerLink="/authors/view/{{a.id}}"><mat-icon>remove_red_eye</mat-icon></a>
+                        <a mat-icon-button color="accent" routerLink="/authors/edit/{{a.id}}"><mat-icon>edit</mat-icon></a>
+                        <a mat-icon-button color="warn" (click)="openDialog(a)"><mat-icon>delete</mat-icon></a>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-list-item>
+    </mat-list>
+</mat-card>

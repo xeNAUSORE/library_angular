@@ -1,0 +1,38 @@
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+
+<!-- Search Component -->
+<app-search (newSearchEvent)="searchRental($event)"></app-search>
+
+<div class="header-list">
+    <mat-chip><mat-icon matChipAvatar>compare_arrows</mat-icon> {{ rentals.length }} emprunt(s)</mat-chip>
+</div>
+
+<mat-card>
+    <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let r of rentals | search: searchText">
+            <div *ngIf="r.noresult; else hasResult">{{r.noresult}}</div>
+            <ng-template #hasResult>
+                <div class="list-item">
+                    <div>
+                        <div>{{r.book.title}} | {{r.user.firstname}} {{r.user.lastname}}</div>
+                        <div class="subtitle"><mat-icon>arrow_back</mat-icon>{{r.rentAt | date:'dd/MM/YYYY'}} | 
+                            <mat-icon>arrow_forward</mat-icon>
+                            <span *ngIf="r.returnAt; else hasReturnDate">{{r.returnAt}}</span>
+                            <ng-template #hasReturnDate>
+                                en attente
+                            </ng-template>
+                        </div>
+                    </div>
+                    
+                    <div class="list-items-right">
+                        <a mat-icon-button color="primary" (click)="openConfirmDialog(r)"><mat-icon>arrow_forward</mat-icon></a>
+                        <a mat-icon-button color="primary" routerLink="/rentals/view/{{r.id}}"><mat-icon>remove_red_eye</mat-icon></a>
+                        <a mat-icon-button color="accent" routerLink="/rentals/edit/{{r.id}}"><mat-icon>edit</mat-icon></a>
+                        <a mat-icon-button color="warn" (click)="openDeleteDialog(r)"><mat-icon>delete</mat-icon></a>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-list-item>
+    </mat-list>
+</mat-card>

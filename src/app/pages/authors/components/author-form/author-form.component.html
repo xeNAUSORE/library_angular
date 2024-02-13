@@ -1,0 +1,53 @@
+<mat-card>
+    <form (ngSubmit)="onSubmit()" [formGroup]="authorForm" #formDir="ngForm">
+        <mat-card-content class="form-input-container">
+            <mat-form-field>
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="firstname" required>
+                <!-- error message -->
+                <mat-error  *ngIf="firstname != null && firstname.invalid && (firstname.dirty || firstname.touched)">
+                    <span *ngIf="firstname.errors?.['required']">Le prénnom est requis.</span>
+                    <span *ngIf="firstname.errors?.['minlength']">
+                        le prénom doit contenir au moins 2 caractères.
+                    </span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="lastname"  required>
+                <!-- error message -->
+                <mat-error  *ngIf="lastname != null && lastname.invalid && (lastname.dirty || lastname.touched)">
+                    <span *ngIf="lastname.errors?.['required']">Le prénnom est requis.</span>
+                    <span *ngIf="lastname.errors?.['minlength']">
+                        le prénom doit contenir au moins 2 caractères.
+                    </span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Mail</mat-label>
+                <input type="text" matInput formControlName="mail" name="mail">
+                <!-- error message -->
+                <mat-error  *ngIf="mail != null && mail.invalid && (mail.dirty || mail.touched)">
+                    <span *ngIf="mail.errors?.['pattern']">Le mail est invalid.</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Tel</mat-label>
+                <input type="text" matInput formControlName="phone" name="phone">
+                  <!-- error message -->
+                  <mat-error  *ngIf="phone != null && phone.invalid && (phone.dirty || phone.touched)">
+                    <span *ngIf="phone.errors?.['pattern']">Le téléphone est invalid.</span>
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+
+        <mat-divider></mat-divider>
+
+        <mat-card-actions class="card-actions">
+            <button mat-raised-button type="submit" color="primary" [disabled]="authorForm.invalid">Valider</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

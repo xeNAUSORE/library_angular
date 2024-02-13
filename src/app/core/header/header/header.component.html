@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="main-nav">
+	<div>
+		<span class="nav-title">Library</span>
+		<span *ngIf="isAuthenticated">
+			<a mat-button routerLink="/domains">Domaines</a>
+			<a mat-button routerLink="/books">Livres</a>
+			<a mat-button routerLink="/authors">Auteurs</a>
+			<a mat-button routerLink="/rentals">Emprunts</a>
+			<a mat-button routerLink="/users">Utilisateurs</a>
+		</span>
+	</div>
+		
+	<div>
+		<a mat-button *ngIf="isAuthenticated" (click)="logout()">Se déconnecter</a>
+		<a mat-button *ngIf="!isAuthenticated" routerLink="/auth/login">Se connecter</a>
+	</div>
+</mat-toolbar>
+ 

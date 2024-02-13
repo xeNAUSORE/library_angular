@@ -1,0 +1,36 @@
+<!-- Title page component -->
+<app-title-page title="Login" ></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+
+<mat-card>
+    <form (ngSubmit)="onSubmit()" [formGroup]="authForm" #formDir="ngForm">
+        <mat-card-content>
+            <div class="form-input-container">
+                <mat-form-field>
+                    <mat-label>Login</mat-label>
+                    <input matInput  type="text" formControlName="username" name="username" required>
+                    <!-- error message -->
+                    <mat-error  *ngIf="username != null && username.invalid && (username.dirty || username.touched)">
+                        <span *ngIf="username.errors?.['required']">Le nom d'utilisateur est requis.</span>
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field >
+                    <mat-label>Password</mat-label>
+                    <input matInput  type="password" formControlName="password" required>
+                    <!-- error message -->
+                    <mat-error  *ngIf="password != null && password.invalid && (password.dirty || password.touched)">
+                        <span *ngIf="password.errors?.['required']">Le mot de passe est requis.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+
+        <mat-divider></mat-divider>
+
+        <mat-card-actions align="end">
+            <button mat-raised-button type="submit" color="primary" [disabled]="authForm.invalid">Login</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

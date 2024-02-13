@@ -1,0 +1,6 @@
+<!-- Title page component -->
+<app-title-page title="Ajouter un domaine" ></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+<!-- Form Component -->
+<app-domain-form (newDomainEvent)="addDomain($event)"></app-domain-form>

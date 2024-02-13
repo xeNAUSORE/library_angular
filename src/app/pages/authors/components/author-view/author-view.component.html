@@ -1,0 +1,22 @@
+<!-- Title page component -->
+<app-title-page title="Author: {{author.firstname}} {{author.lastname}}"></app-title-page>
+
+<!-- Author View-->
+<mat-card>
+    <mat-card-header class="card-header">
+        <mat-card-title>{{author.firstname}} {{author.lastname}}</mat-card-title>
+        <mat-card-subtitle class="card-subtitle">{{author.mail}} <span *ngIf="author.phone != ''"> | {{author.phone}}</span></mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions align="end" class="card-actions">  
+        <a mat-raised-button color="primary" routerLink="/authors/edit/{{author.id}}">Editer</a>
+    </mat-card-actions>
+</mat-card>
+
+
+<!-- Title page component -->
+<app-title-page title="Liste des livres de l'auteur"></app-title-page>
+<!-- Book list component-->
+<app-book-list *ngIf="authorBooks.length > 0" [books]="authorBooks"></app-book-list>

@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Confirmer {{title}}</h2>
+<mat-dialog-content>
+	<p>êtes vous sure de vouloir confirmer <b>{{message}}</b> ?</p>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="center">
+	<button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1">Confirmer</button>
+	<button mat-raised-button mat-dialog-close tabindex="-1">Annuler</button>
+</mat-dialog-actions>

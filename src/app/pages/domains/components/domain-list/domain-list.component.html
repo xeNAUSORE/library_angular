@@ -1,0 +1,25 @@
+<app-title-page title="Liste des domaines" [hasAddBtn]="true" linkBtn="/domains/add"></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+<!-- Search Component -->
+<app-search (newSearchEvent)="searchDomain($event)"></app-search>
+<mat-card>
+    <mat-list role="list">
+       
+        <mat-list-item role="listitem" *ngFor="let d of domains | search: searchText">
+            <div *ngIf="d.noresult; else hasResult">{{d.noresult}}</div>
+            <ng-template #hasResult>
+                <div class="list-item">
+                    <span>{{d.name}}</span>
+                    
+                    <div class="list-items-right">
+                        <mat-chip><mat-icon matChipAvatar>library_books</mat-icon> {{ d.books?.length }} livre(s)</mat-chip>
+                        <a mat-icon-button color="primary" routerLink="/domains/view/{{d.id}}"><mat-icon>remove_red_eye</mat-icon></a>
+                        <a mat-icon-button color="accent" routerLink="/domains/edit/{{d.id}}"><mat-icon>edit</mat-icon></a>
+                        <a mat-icon-button color="warn" (click)="openDialog(d)"><mat-icon>delete</mat-icon></a>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-list-item>
+    </mat-list>
+</mat-card>

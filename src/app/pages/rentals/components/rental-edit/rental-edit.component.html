@@ -1,0 +1,17 @@
+<!-- Title page component -->
+<app-title-page title="Modifier l'emprunt: {{ rental.book.title }} - {{rental.user.firstname}} {{rental.user.lastname}}" ></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+<!-- Form Component -->
+<div class="rent-date-container">
+    <span class="rent-date"><mat-icon>arrow_back</mat-icon>{{rental.rentAt | date:'dd/MM/YYYY'}}</span>
+    <span class="rent-date">
+        <mat-icon>arrow_forward</mat-icon>
+        <span *ngIf="rental.returnAt; else hasReturnDate">{{rental.returnAt}}</span>
+        <ng-template #hasReturnDate>
+            en attente
+        </ng-template>
+    </span>
+</div>
+
+<app-rental-form (newRentalEvent)="editRental($event)" [rental]="rental"></app-rental-form>

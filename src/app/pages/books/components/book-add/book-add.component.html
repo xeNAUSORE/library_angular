@@ -1,0 +1,6 @@
+<!-- Title page component -->
+<app-title-page title="Ajouter un livre" ></app-title-page>
+<!-- Error card component -->
+<app-error-card *ngIf="hasError"></app-error-card>
+<!-- Form Component -->
+<app-book-form (newBookEvent)="addBook($event)"></app-book-form>
