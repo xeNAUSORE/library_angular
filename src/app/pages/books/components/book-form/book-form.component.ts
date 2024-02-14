@@ -27,20 +27,15 @@ import { DomainsService } from '../../../../core/services/domain/domains.service
 export class BookFormComponent implements OnInit, OnDestroy {
 	////////////////////////////////////////
 	// Properties
+	isDataLoaded: boolean = false
 	@Input() book: any
 	@Output() newBookEvent =  new EventEmitter()
 
 	bookForm!: FormGroup
 	private authorSubscription!: Subscription
 	private domainSubscription!: Subscription
-	authors: Author[] = [
-		{ id:1, firstname:'stephen', lastname:'king', email:'', grade:'', phone:'', books:null },
-		{ id:2, firstname:'mc', lastname:'skyze',email:'', grade:'', phone:'', books:null }
-	]
-	domains: Domain[] = [
-		{id: 1, name:'Science fiction', description:'', books:null },
-		{id: 2, name:'Polar', description:'', books:null}
-	]
+	authors!: Author[]
+	domains!: Domain[]
 
 	constructor(private authorsService: AuthorsService, private domainsService: DomainsService){}
 
@@ -59,7 +54,10 @@ export class BookFormComponent implements OnInit, OnDestroy {
 			author: new FormControl('', [
 				Validators.required,
 			]),
-			description: new FormControl('')
+			nbpages: new FormControl('', [
+				Validators.required,
+			]),
+			description: new FormControl(''),
 		});
 
 		//set un domaine est passer en param du component (edit)
@@ -67,19 +65,23 @@ export class BookFormComponent implements OnInit, OnDestroy {
 			this.bookForm.setValue({ 
 				title: this.book.title, 
 				description: this.book.description, 
-				domain: this.book.domain.id,
-				author: this.book.author.id,
+				domain: this.book.domainId,
+				author: this.book.authorId,
+				nbpages: this.book.nbpages,
 			})
 
 		//load list author & domain
-		// this.authorSubscription = this.authorsService.getAuthorList().subscribe({
-		// 	next: (data) => { this.authors = data },
-		// 	error: (err) => { }
-		// })
-		// this.domainSubscription = this.domainsService.getDomainList().subscribe({
-		// 	next: (data) => { this.domains = data },
-		// 	error: (err) => { }
-		// })
+		this.authorSubscription = this.authorsService.getAuthorList().subscribe({
+			next: (data) => { this.authors = data },
+			error: (err) => { }
+		})
+		this.domainSubscription = this.domainsService.getDomainList().subscribe({
+			next: (data) => { 
+				this.domains = data 
+				this.isDataLoaded = true
+			},
+			error: (err) => { }
+		})
 	}
 
 	ngOnDestroy(): void {
@@ -104,6 +106,9 @@ export class BookFormComponent implements OnInit, OnDestroy {
 	get author(){
 		return this.bookForm.get('author')
 	}
+	get nbpages(){
+		return this.bookForm.get('nbpages')
+	}
 
 	///////////////////////////////////////
 	// Méthode submit du formulaire
@@ -112,10 +117,11 @@ export class BookFormComponent implements OnInit, OnDestroy {
 		if(this.book) b = { id:this.book.id }
 		b = { 
 			...b, 
-			title: this.bookForm.get('title'), 
-			description: this.bookForm.get('description'),
-			doamin: this.bookForm.get('domain'),
-			author: this.bookForm.get('author')
+			title: this.bookForm.get('title')?.value, 
+			description: this.bookForm.get('description')?.value,
+			domainId: this.bookForm.get('domain')?.value,
+			authorId: this.bookForm.get('author')?.value,
+			nbpages: this.bookForm.get('nbpages')?.value
 		}
 
 		//Emit l'objet au component parent

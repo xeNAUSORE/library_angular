@@ -30,7 +30,7 @@ export class DomainViewComponent implements OnDestroy, OnInit {
 	// Properties
 	isDataloaded: boolean = false
 	domain!: Domain 
-	domainBooks: Book[] = this.domain?.books ?? []
+	domainBooks: Book[]  = [] 
 	
 	private domainSubscription!: Subscription
 
@@ -47,6 +47,7 @@ export class DomainViewComponent implements OnDestroy, OnInit {
 			this.domainSubscription = this.domainsService.getDomain(id).subscribe({
 				next: (data) => { 
 					this.domain = data
+					this.domainBooks = data.books ?? []
 					this.isDataloaded = true
 				},
 				error: (err) => { this.router.navigateByUrl('/domains') }

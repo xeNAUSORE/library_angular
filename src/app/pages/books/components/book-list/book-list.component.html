@@ -1,4 +1,6 @@
-<app-title-page title="Liste des livres" [hasAddBtn]="true" linkBtn="/books/add"></app-title-page>
+<div *ngIf="isDataLoaded">
+    <app-title-page title="Liste des livres" [hasAddBtn]="true" linkBtn="/books/add"></app-title-page>
 
-<!-- Book list component -->
-<app-book-list [books]="books"></app-book-list>
+    <!-- Book list component -->
+    <app-book-list [books]="books"></app-book-list>
+</div>

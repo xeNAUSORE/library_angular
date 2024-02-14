@@ -23,17 +23,12 @@ import { Book } from '../../../../shared/models/book';
 export class BookEditComponent implements OnInit, OnDestroy {
 	////////////////////////////////////////
 	// Properties
+	isDataLoaded: boolean = false
 	hasError: boolean = false
 	private bookSubscription!: Subscription
 
 	//pour test sans API
-	book: Book = { 
-		id:1, title:'ça', 
-		description:'ça ça ça', 
-		author: { id:1, firstname:'stephen', lastname:'king',email:'', grade:'', phone:'', books:null },
-		domain: { id:1, name:'Science fiction', description:'', books:null },
-		rentals: null
-	}
+	book!: Book
 
 	constructor(private booksService: BooksService, private router: Router, private activatedRoute: ActivatedRoute){}
 
@@ -44,11 +39,14 @@ export class BookEditComponent implements OnInit, OnDestroy {
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
 		if(paramId == null) this.router.navigateByUrl('/books')
 		else {
-			// const id = parseInt(paramId)
-			// this.bookSubscription = this.booksService.getBook(id).subscribe({
-			// 	next: (data) => { this.bool = data },
-			// 	error: (err) => { this.router.navigateByUrl('/books') }
-			// })
+			const id = parseInt(paramId)
+			this.bookSubscription = this.booksService.getBook(id).subscribe({
+				next: (data) => { 
+					this.book = data 
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/books') }
+			})
 		}
 	}
 

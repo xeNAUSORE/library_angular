@@ -6,6 +6,7 @@ export interface Book {
     id: number,
     title: string,
     description: string,
+    nbpages: number,
     domain: Domain | null,
     author: Author | null,
     rentals: Rental[] | null

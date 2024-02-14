@@ -37,8 +37,8 @@ export class BookAddComponent implements OnDestroy {
 	////////////////////////////////////////
 	// Méthode création de l'auteur emit
 	// Emit par le component enfant (book-form) au submit
-	addBook(author: any){
-		this.bookSubscription = this.booksService.createBook(author).subscribe({
+	addBook(book: any){
+		this.bookSubscription = this.booksService.createBook(book).subscribe({
 			next: (data) => { this.router.navigateByUrl('/books') },
 			error: (err) => { this.hasError = true }
 		})

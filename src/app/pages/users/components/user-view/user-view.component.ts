@@ -28,53 +28,7 @@ import { UsersService } from '../../../../core/services/users/users.service';
 export class UserViewComponent implements OnDestroy, OnInit {
 	////////////////////////////////////////
 	// Properties
-	user: User = { 
-		id:1, 
-		firstname:'xen',
-		lastname:'ausore',
-		mail:'xenausore@gmail.com', phone:'0102030405', 
-		address: {
-			id: 1,
-			number: 12,
-			street: 'rue du château',
-			apt: '',
-			city: 'Nantes',
-			country: 'France',
-			zip: '44000'
-		} ,
-		rentals: [
-			{ 
-				id:1, 
-				user: {
-					id:1,
-					firstname:'Xen',
-					lastname: 'Ausore',
-					mail: 'xenausore@gmail.com',
-					phone: '0102030405',
-					address: { 
-						id:1, 
-						number:12, 
-						street:'Rue du château',
-						apt: '',
-						city: 'Nantes',
-						zip:'44000',
-						country: 'France'
-					},
-					rentals: null
-				},
-				book: { 
-					id:1, 
-					title:"ça", 
-					description:'', 
-					author: { id:1, firstname:'Stephen', lastname:'King', email:'', phone:'', books:null, grade:'' },
-					domain: { id:1, name:'Science Fiction', description:'', books:null} ,
-					rentals: null
-				} ,
-				rentAt: new Date(),
-				returnAt: null
-			}
-		]
-	}
+	user!: User
 	userRentals: Rental[] = this.user.rentals ?? []
 	
 	private userSubscription!: Subscription

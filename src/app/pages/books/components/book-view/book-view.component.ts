@@ -29,47 +29,10 @@ import { BooksService } from '../../../../core/services/book/books.service';
 export class BookViewComponent implements OnDestroy, OnInit{
 	////////////////////////////////////////
 	// Properties
-	book: Book = {
-		id:1, 
-		title:"ça", 
-		description:'lorem ipsum doler es du ast.', 
-		author: { id:1, firstname:'Stephen', lastname:'King', email:'', grade:'', phone:'', books:null },
-		domain: { id:1, name:'Science Fiction', description:'', books:null} ,
-		rentals: [
-			{ 
-				id:1, 
-				user: {
-					id:1,
-					firstname:'Xen',
-					lastname: 'Ausore',
-					mail: 'xenausore@gmail.com',
-					phone: '0102030405',
-					address: { 
-						id:1, 
-						number:12, 
-						street:'Rue du château',
-						apt: '',
-						city: 'Nantes',
-						zip:'44000',
-						country: 'France'
-					},
-					rentals: null
-				},
-				book: { 
-					id:1, 
-					title:"ça", 
-					description:'', 
-					author: { id:1, firstname:'Stephen', lastname:'King',email:'', grade:'', phone:'', books:null },
-					domain: { id:1, name:'Science Fiction', description:'', books:null} ,
-					rentals: null
-				} ,
-				rentAt: new Date(),
-				returnAt: null
-			}
-		]
-	}
+	isDataLoaded = false
+	book!: Book
 	
-	bookRentals: Rental[] = this.book.rentals ?? []
+	bookRentals: Rental[] = []
 	
 	private bookSubscription!: Subscription
 
@@ -80,13 +43,17 @@ export class BookViewComponent implements OnDestroy, OnInit{
 	ngOnInit(): void {
 		//Get l'id en parametre de l'url
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
-		if(paramId == null) this.router.navigateByUrl('/authors')
+		if(paramId == null) this.router.navigateByUrl('/books')
 		else {
-			// const id = parseInt(paramId)
-			// this.bookSubscription = this.authorsService.getAuthor(id).subscribe({
-			// 	next: (data) => {  },
-			// 	error: (err) => { this.router.navigateByUrl('/domains') }
-			// })
+			const id = parseInt(paramId)
+			this.bookSubscription = this.booksService.getBook(id).subscribe({
+				next: (data) => { 
+					this.book = data 
+					this.bookRentals = data.rentals ?? []
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/books') }
+			})
 		}
 	}
 	ngOnDestroy(): void{
