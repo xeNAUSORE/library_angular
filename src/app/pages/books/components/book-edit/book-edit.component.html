@@ -1,6 +1,8 @@
-<!-- Title page component -->
-<app-title-page title="Modifier le livre: {{ book.title }}" ></app-title-page>
-<!-- Error card component -->
-<app-error-card *ngIf="hasError"></app-error-card>
-<!-- Form Component -->
-<app-book-form (newBookEvent)="editBook($event)" [book]="book"></app-book-form>
+<div *ngIf="isDataLoaded">
+    <!-- Title page component -->
+    <app-title-page title="Modifier le livre: {{ book.title }}" ></app-title-page>
+    <!-- Error card component -->
+    <app-error-card *ngIf="hasError"></app-error-card>
+    <!-- Form Component -->
+    <app-book-form (newBookEvent)="editBook($event)" [book]="book"></app-book-form>
+</div>

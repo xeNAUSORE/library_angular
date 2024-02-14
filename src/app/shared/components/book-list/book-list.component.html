@@ -17,7 +17,13 @@
                     <div class="list-item">
                         <div>
                             <div>{{b.title}}</div>
-                            <div class="subtitle">{{b.author.firstname}} {{b.author.lastname}} | {{b.domain.name}}</div>
+                            <div class="subtitle">
+                                {{b.author?.firstname}} {{b.author?.lastname}} 
+                                <span *ngIf="b.domain"> 
+                                    <span *ngIf="b.author">|</span> 
+                                    {{b.domain?.name}}
+                                </span>
+                            </div>
                         </div>
                         
                         <div class="list-items-right">

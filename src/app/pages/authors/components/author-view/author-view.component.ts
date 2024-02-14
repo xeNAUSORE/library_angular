@@ -31,7 +31,7 @@ export class AuthorViewComponent implements OnDestroy, OnInit {
 	// Properties
 	isDataLoaded: boolean = false
 	author!: Author 
-	authorBooks: Book[] = this.author?.books ?? []
+	authorBooks: Book[] = []
 	
 	private authorSubscription!: Subscription
 
@@ -48,6 +48,7 @@ export class AuthorViewComponent implements OnDestroy, OnInit {
 			this.authorSubscription = this.authorsService.getAuthor(id).subscribe({
 				next: (data) => {  
 					this.author = data 
+					this.authorBooks = data.books ?? []
 					this.isDataLoaded = true
 				},
 				error: (err) => { this.router.navigateByUrl('/domains') }

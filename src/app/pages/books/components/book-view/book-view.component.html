@@ -1,26 +1,28 @@
-<!-- Title page component -->
-<app-title-page title="Livre : {{book.title}}"></app-title-page>
+<div *ngIf="isDataLoaded">
+    <!-- Title page component -->
+    <app-title-page title="Livre : {{book.title}}"></app-title-page>
 
-<!-- Author View-->
-<mat-card>
-    <mat-card-header class="card-header">
-        <mat-card-title>{{book.title}}</mat-card-title>
-        <mat-card-subtitle class="card-subtitle">{{book.author?.firstname}} {{book.author?.lastname}} | {{book.domain?.name}}</mat-card-subtitle>
-    </mat-card-header>
+    <!-- Author View-->
+    <mat-card>
+        <mat-card-header class="card-header">
+            <mat-card-title>{{book.title}}</mat-card-title>
+            <mat-card-subtitle class="card-subtitle">{{book.author?.firstname}} {{book.author?.lastname}} | {{book.domain?.name}} | {{book.nbpages}} page(s)</mat-card-subtitle>
+        </mat-card-header>
 
-    <mat-card-content class="card-content">
-        {{book.description}}
-    </mat-card-content>
+        <mat-card-content class="card-content">
+            {{book.description}}
+        </mat-card-content>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <mat-card-actions align="end" class="card-actions">  
-        <a mat-raised-button color="primary" routerLink="/rentals/add/{{book.id}}">Emprunter</a>
-        <a mat-raised-button color="primary" routerLink="/books/edit/{{book.id}}">Editer</a>
-    </mat-card-actions>
-</mat-card>
+        <mat-card-actions align="end" class="card-actions">  
+            <a mat-raised-button color="primary" routerLink="/rentals/add/{{book.id}}">Emprunter</a>
+            <a mat-raised-button color="primary" routerLink="/books/edit/{{book.id}}">Editer</a>
+        </mat-card-actions>
+    </mat-card>
 
-<!-- Title page component -->
-<app-title-page title="Liste des emprunts du livre"></app-title-page>
-<!-- Rentals list component-->
-<app-rental-list *ngIf="bookRentals.length > 0" [rentals]="bookRentals"></app-rental-list>
+    <!-- Title page component -->
+    <app-title-page title="Liste des emprunts du livre"></app-title-page>
+    <!-- Rentals list component-->
+    <app-rental-list *ngIf="bookRentals.length > 0" [rentals]="bookRentals"></app-rental-list>
+</div>

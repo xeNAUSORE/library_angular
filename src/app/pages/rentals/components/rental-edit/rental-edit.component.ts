@@ -29,37 +29,7 @@ export class RentalEditComponent implements OnInit, OnDestroy {
 	hasError: boolean = false
 	private rentalSubscription!: Subscription
 
-	//pour test sans API
-	rental: Rental = { 
-		id:1, 
-		user: {
-			id:1,
-			firstname:'Xen',
-			lastname: 'Ausore',
-			mail: 'xenausore@gmail.com',
-			phone: '0102030405',
-			address: { 
-				id:1, 
-				number:12, 
-				street:'Rue du château',
-				apt: '',
-				city: 'Nantes',
-				zip:'44000',
-				country: 'France'
-			},
-			rentals: null
-		},
-		book: { 
-			id:1, 
-			title:"ça", 
-			description:'', 
-			author: { id:1, firstname:'Stephen', lastname:'King',email:'', grade:'', phone:'', books:null },
-			domain: { id:1, name:'Science Fiction', description:'', books:null} ,
-			rentals: null
-		},
-		rentAt: new Date(),
-		returnAt: null
-	}
+	rental!: Rental
 
 	constructor(private rentalsService: RentalsService, private router: Router, private activatedRoute: ActivatedRoute){}
 
