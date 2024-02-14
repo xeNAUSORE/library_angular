@@ -7,10 +7,10 @@ import { AuthService } from "../services/authentication/auth.service"
 
 export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
 	const authService = inject(AuthService);
-	let token = null //authService.getToken();
-
+	let token = authService.getToken();
+console.log("token", `Bearer ${token.access_token}`)
 	if (token) {
-		token = `Bearer ${token}`
+		token = `Bearer ${token.access_token}`
 
 		const cloned = req.clone({
 			setHeaders: {

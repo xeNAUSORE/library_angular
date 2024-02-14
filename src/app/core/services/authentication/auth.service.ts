@@ -24,7 +24,7 @@ export class AuthService {
 	}
 
 	login(user: any): Observable<User> {
-		return this.http.post<User>(`${this.baseUrl}/members/login`, user);
+		return this.http.post<User>(`${this.baseUrl}/admins/login`, user);
 	}
 
 	logout(): Observable<boolean>{
