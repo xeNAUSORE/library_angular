@@ -26,22 +26,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 	hasError: boolean = false
 	private userSubscription!: Subscription
 	//pour test sans API
-	user: User = { 
-		id:1, 
-		firstname:'xen',
-		lastname:'ausore',
-		mail:'xenausore@gmail.com', phone:'0102030405', 
-		address: {
-			id: 1,
-			number: 12,
-			street: 'rue du château',
-			apt: '',
-			city: 'Nantes',
-			country: 'France',
-			zip: '44000'
-		},
-		rentals: null 
-	}
+	user!: User
 	
 	constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute){}
 

@@ -36,25 +36,7 @@ export class RentalFormComponent implements OnInit, OnDestroy {
 	private userSubscription!: Subscription
 	private bookSubscription!: Subscription
 
-	users: User[] = [
-		{
-			id:1,
-			firstname:'Xen',
-			lastname: 'Ausore',
-			mail: 'xenausore@gmail.com',
-			phone: '0102030405',
-			address: { 
-				id:1, 
-				number:12, 
-				street:'Rue du château',
-				apt: '',
-				city: 'Nantes',
-				zip:'44000',
-				country: 'France'
-			},
-			rentals: null
-		},
-	]
+	users!: User[]
 	books!: Book[]
 
 	constructor(private usersService: UsersService, private booksService: BooksService){}
