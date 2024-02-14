@@ -50,10 +50,12 @@ export class BookListComponent implements OnInit, OnDestroy {
 	}
 
 	////////////////////////////////////////
-	// Méthode delete de domain 
-	deleteAuthor(id: number){
+	// Méthode delete  
+	deleteBook(id: number){
 		this.bookSubscription = this.booksService.deleteBook(id).subscribe({
-			next: (data) => {  },
+			next: (data) => {  
+				this.books = this.books.filter(u => u.id != id)
+			},
 			error: (err) => { this.hasError = true }
 		})
 	}
@@ -75,7 +77,7 @@ export class BookListComponent implements OnInit, OnDestroy {
 
 		dialogRef.afterClosed().subscribe((confirmed: boolean) => {
 		  	if (confirmed) {
-				this.deleteAuthor(book.id)
+				this.deleteBook(book.id)
 				dialogRef.close();
 		  	}
 		});

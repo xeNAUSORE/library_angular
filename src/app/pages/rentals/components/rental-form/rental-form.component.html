@@ -1,33 +1,35 @@
-<mat-card>
-    <form (ngSubmit)="onSubmit()" [formGroup]="rentalForm" #formDir="ngForm">
-        <mat-card-content class="form-input-container">
-            <mat-form-field>
-                <mat-label>Lecteur</mat-label>
-                <mat-select formControlName="user" required>
-                    <mat-option *ngFor="let u of users" [value]="u.id">{{u.firstname}} {{u.lastname}}</mat-option>
-                </mat-select>
-                <!-- error message -->
-                <mat-error  *ngIf="user != null && user.invalid && (user.dirty || user.touched)">
-                    <span *ngIf="user.errors?.['required']">Le lecteur est requis.</span>
-                </mat-error>
-            </mat-form-field>
+<div *ngIf="isDataLoaded">
+    <mat-card>
+        <form (ngSubmit)="onSubmit()" [formGroup]="rentalForm" #formDir="ngForm">
+            <mat-card-content class="form-input-container">
+                <mat-form-field>
+                    <mat-label>Lecteur</mat-label>
+                    <mat-select formControlName="user" required>
+                        <mat-option *ngFor="let u of users" [value]="u.id">{{u.firstname}} {{u.lastname}}</mat-option>
+                    </mat-select>
+                    <!-- error message -->
+                    <mat-error  *ngIf="user != null && user.invalid && (user.dirty || user.touched)">
+                        <span *ngIf="user.errors?.['required']">Le lecteur est requis.</span>
+                    </mat-error>
+                </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Livre</mat-label>
-                <mat-select formControlName="book" required>
-                    <mat-option *ngFor="let b of books" [value]="b.id">{{b.title}}</mat-option>
-                </mat-select>
-                <!-- error message -->
-                <mat-error  *ngIf="book != null && book.invalid && (book.dirty || book.touched)">
-                    <span *ngIf="book.errors?.['required']">Le livre est requis.</span>
-                </mat-error>
-            </mat-form-field>
-        </mat-card-content>
-        
-        <mat-divider></mat-divider>
+                <mat-form-field>
+                    <mat-label>Livre</mat-label>
+                    <mat-select formControlName="book" required>
+                        <mat-option *ngFor="let b of books" [value]="b.id">{{b.title}}</mat-option>
+                    </mat-select>
+                    <!-- error message -->
+                    <mat-error  *ngIf="book != null && book.invalid && (book.dirty || book.touched)">
+                        <span *ngIf="book.errors?.['required']">Le livre est requis.</span>
+                    </mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            
+            <mat-divider></mat-divider>
 
-        <mat-card-actions class="card-actions">
-            <button mat-raised-button type="submit" color="primary" [disabled]="rentalForm.invalid">Valider</button>
-        </mat-card-actions>
-    </form>
-</mat-card>
+            <mat-card-actions class="card-actions">
+                <button mat-raised-button type="submit" color="primary" [disabled]="rentalForm.invalid">Valider</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

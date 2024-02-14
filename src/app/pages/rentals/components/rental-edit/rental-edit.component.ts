@@ -26,10 +26,11 @@ import { Rental } from '../../../../shared/models/rental';
 export class RentalEditComponent implements OnInit, OnDestroy {
 	////////////////////////////////////////
 	// Properties
+	isDataLoaded: boolean = false
 	hasError: boolean = false
 	private rentalSubscription!: Subscription
 
-	rental!: Rental
+	rental!: any
 
 	constructor(private rentalsService: RentalsService, private router: Router, private activatedRoute: ActivatedRoute){}
 
@@ -40,11 +41,14 @@ export class RentalEditComponent implements OnInit, OnDestroy {
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
 		if(paramId == null) this.router.navigateByUrl('/rentals')
 		else {
-			// const id = parseInt(paramId)
-			// this.rentalSubscription = this.rentalsService.getRental(id).subscribe({
-			// 	next: (data) => { this.rental = data },
-			// 	error: (err) => { this.router.navigateByUrl('/books') }
-			// })
+			const id = parseInt(paramId)
+			this.rentalSubscription = this.rentalsService.getRental(id).subscribe({
+				next: (data) => { 
+					this.rental = data 
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/books') }
+			})
 		}
 	}
 

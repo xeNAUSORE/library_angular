@@ -31,7 +31,8 @@ import { DatePipe } from '@angular/common';
 export class RentalViewComponent implements OnDestroy, OnInit {
 	////////////////////////////////////////
 	// Properties
-	rental!: Rental
+	isDataLoaded: boolean = false
+	rental!: any
 	
 	private rentalSubscription!: Subscription
 
@@ -44,11 +45,15 @@ export class RentalViewComponent implements OnDestroy, OnInit {
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
 		if(paramId == null) this.router.navigateByUrl('/users')
 		else {
-			// const id = parseInt(paramId)
-			// this.rentalSubscription = this.rentalsService.getRental(id).subscribe({
-			// 	next: (data) => { this.rental = data },
-			// 	error: (err) => { this.router.navigateByUrl('/rentals') }
-			// })
+			const id = parseInt(paramId)
+			this.rentalSubscription = this.rentalsService.getRental(id).subscribe({
+				next: (data) => { 
+					this.rental = data 
+					console.log(data)
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/rentals') }
+			})
 		}
 	}
 	ngOnDestroy(): void{
@@ -56,9 +61,14 @@ export class RentalViewComponent implements OnDestroy, OnInit {
 			this.rentalSubscription.unsubscribe()
 	}
 
-	returnRental(rental: Rental){
-		this.rentalSubscription = this.rentalsService.returnRental(rental).subscribe({
-			next: (data) => { },
+	returnRental(rental: any){
+		
+		const r = { id: rental.id, bookId: rental.bookId, lectorId:rental.lectorId, rentalId: rental.rentalId, rentailDate: rental.rentailDate, returnDate:null  }
+
+		this.rentalSubscription = this.rentalsService.returnRental(r).subscribe({
+			next: (data) => { 
+				this.router.navigateByUrl('/rentals')
+			},
 			error: (err) => {}
 		})
 	}

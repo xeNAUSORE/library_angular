@@ -21,5 +21,5 @@ export class RentalsService {
 	editRental(rental: Rental): Observable<Rental> { return this.http.put<Rental>(`${this.baseUrl}/rentals`, rental) }
 	deleteRental(id: number): Observable<boolean> { return this.http.delete<boolean>(`${this.baseUrl}/rentals/${id}`) }
 
-	returnRental(rental: Rental): Observable<Rental> { return this.http.put<Rental>(`${this.baseUrl}/rentals/returnBook/`, rental) }
+	returnRental(rental: any): Observable<Rental> { return this.http.put<Rental>(`${this.baseUrl}/rentals/returnBook/${rental.id}`, rental) }
 }

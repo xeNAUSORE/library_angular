@@ -28,6 +28,7 @@ import { BooksService } from '../../../../core/services/book/books.service';
 export class RentalFormComponent implements OnInit, OnDestroy {
 	////////////////////////////////////////
 	// Properties
+	isDataLoaded: boolean = false
 	@Input() rental: any
 	@Output() newRentalEvent =  new EventEmitter()
 
@@ -57,7 +58,7 @@ export class RentalFormComponent implements OnInit, OnDestroy {
 		if(this.rental)
 			this.rentalForm.setValue({ 
 				book: this.rental.book.id,
-				user: this.rental.user.id,
+				user: this.rental.lector.id,
 			})
 			
 		//load list
@@ -66,7 +67,10 @@ export class RentalFormComponent implements OnInit, OnDestroy {
 			error: (err) => { }
 		})
 		this.bookSubscription = this.booksService.getAvailableBookList().subscribe({
-			next: (data) => { this.books = data },
+			next: (data) => { 
+				this.books = data 
+				this.isDataLoaded = true
+			},
 			error: (err) => { }
 		})
 	}
@@ -96,8 +100,8 @@ export class RentalFormComponent implements OnInit, OnDestroy {
 		if(this.rental) r = { id:this.rental.id }
 		r = { 
 			...r, 
-			user: this.rentalForm.get('user'), 
-			book: this.rentalForm.get('book'),
+			lectorId: this.rentalForm.get('user')?.value, 
+			bookId: this.rentalForm.get('book')?.value,
 		}
 
 		//Emit l'objet au component parent

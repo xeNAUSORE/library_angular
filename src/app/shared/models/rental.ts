@@ -5,6 +5,6 @@ export interface Rental {
     id: number,
     user: User,
     book: Book,
-    rentAt: Date,
-    returnAt: Date | null
+    rentailDate: Date,
+    returnDate: Date | null
 }

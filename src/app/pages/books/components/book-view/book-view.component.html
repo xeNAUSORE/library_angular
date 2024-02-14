@@ -16,13 +16,12 @@
         <mat-divider></mat-divider>
 
         <mat-card-actions align="end" class="card-actions">  
-            <a mat-raised-button color="primary" routerLink="/rentals/add/{{book.id}}">Emprunter</a>
-            <a mat-raised-button color="primary" routerLink="/books/edit/{{book.id}}">Editer</a>
+           <a mat-raised-button color="primary" routerLink="/books/edit/{{book.id}}">Editer</a>
         </mat-card-actions>
     </mat-card>
 
     <!-- Title page component -->
-    <app-title-page title="Liste des emprunts du livre"></app-title-page>
+    <!-- <app-title-page title="Liste des emprunts du livre"></app-title-page> -->
     <!-- Rentals list component-->
-    <app-rental-list *ngIf="bookRentals.length > 0" [rentals]="bookRentals"></app-rental-list>
+    <!-- <app-rental-list *ngIf="bookRentals.length > 0" [rentals]="bookRentals"></app-rental-list> -->
 </div>

@@ -1,4 +1,6 @@
-<app-title-page title="Liste des emprunts" [hasAddBtn]="true" linkBtn="/rentals/add"></app-title-page>
+<div *ngIf="isDataLoaded">
+    <app-title-page title="Liste des emprunts" [hasAddBtn]="true" linkBtn="/rentals/add"></app-title-page>
 
-<!-- Rental list component -->
-<app-rental-list [rentals]="rentals"></app-rental-list>
+    <!-- Rental list component -->
+    <app-rental-list [rentals]="rentals"></app-rental-list>
+</div>

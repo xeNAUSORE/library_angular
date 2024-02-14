@@ -10,10 +10,6 @@ import { TitlePageComponent } from '../../../../shared/components/title-page/tit
 import { ErrorCardComponent } from '../../../../shared/components/error-card/error-card.component';
 //Services
 import { RentalsService } from '../../../../core/services/rentals/rentals.service';
-import { BooksService } from '../../../../core/services/book/books.service';
-//Model
-import { Book } from '../../../../shared/models/book';
-import { UsersService } from '../../../../core/services/users/users.service';
 
 @Component({
 	selector: 'app-rental-add',
@@ -47,7 +43,7 @@ export class RentalAddComponent implements OnInit, OnDestroy {
 	addRental(rental: any){
 		this.rentalSubscription = this.rentalsService.createRental(rental).subscribe({
 			next: (data) => { this.router.navigateByUrl('/rentals') },
-			error: (err) => { this.hasError = true }
+			error: (err) => { console.log(err); this.hasError = true }
 		})
 	}
 }

@@ -32,7 +32,7 @@ export class BookViewComponent implements OnDestroy, OnInit{
 	isDataLoaded = false
 	book!: Book
 	
-	bookRentals: Rental[] = []
+	bookRentals: any = []
 	
 	private bookSubscription!: Subscription
 
