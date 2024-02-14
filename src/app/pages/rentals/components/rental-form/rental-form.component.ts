@@ -30,7 +30,6 @@ export class RentalFormComponent implements OnInit, OnDestroy {
 	// Properties
 	@Input() rental: any
 	@Output() newRentalEvent =  new EventEmitter()
-	@Input() selectedBook: any
 
 	rentalForm!: FormGroup
 	private userSubscription!: Subscription
@@ -61,18 +60,15 @@ export class RentalFormComponent implements OnInit, OnDestroy {
 				user: this.rental.user.id,
 			})
 			
-		if(this.selectedBook)
-			this.rentalForm.setValue({ book: this.selectedBook.id, user: null })
-		
 		//load list
-		// this.userSubscription = this.usersService.getUserList().subscribe({
-		// 	next: (data) => { this.users = data },
-		// 	error: (err) => { }
-		// })
-		// this.bookSubscription = this.booksService.getBookList().subscribe({
-		// 	next: (data) => { this.books = data },
-		// 	error: (err) => { }
-		// })
+		this.userSubscription = this.usersService.getUserList().subscribe({
+			next: (data) => { this.users = data },
+			error: (err) => { }
+		})
+		this.bookSubscription = this.booksService.getAvailableBookList().subscribe({
+			next: (data) => { this.books = data },
+			error: (err) => { }
+		})
 	}
 
 	ngOnDestroy(): void {

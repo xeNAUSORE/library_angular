@@ -19,5 +19,5 @@ export class BooksService {
 	createBook(book: Book): Observable<Book> { return this.http.post<Book>(`${this.baseUrl}/books`, book) }
 	editBook(book: Book): Observable<Book> { return this.http.put<Book>(`${this.baseUrl}/books/${book.id}`, book) }
 	deleteBook(id: number): Observable<boolean> { return this.http.delete<boolean>(`${this.baseUrl}/books/${id}`) }
-
+	getAvailableBookList(): Observable<Book[]> { return this.http.get<Book[]>(`${this.baseUrl}/books/availableBooks`) }
 }

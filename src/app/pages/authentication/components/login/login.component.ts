@@ -71,20 +71,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 			firstname:'', 
 			lastname:'',  
 		}
-		//pour test sans api
-		// localStorage.setItem('authenticatedUser', user)
-		// this.authService.setAuthenticatedRefresh(true)
-		// this.router.navigateByUrl('')
-
 		
 		this.authSubscription = this.authService.login(user).subscribe({
 			next: (data) => { 
-				console.log(data)
 				localStorage.setItem('authenticatedUser', JSON.stringify(data))
 				this.authService.setAuthenticatedRefresh(true)
 				this.router.navigateByUrl('')
 			},
-			error: (err) => { console.log(err); this.hasError = true }
+			error: (err) => { this.hasError = true }
 		})
 	}
 }

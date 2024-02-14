@@ -13,6 +13,7 @@ import { RentalsService } from '../../../../core/services/rentals/rentals.servic
 import { BooksService } from '../../../../core/services/book/books.service';
 //Model
 import { Book } from '../../../../shared/models/book';
+import { UsersService } from '../../../../core/services/users/users.service';
 
 @Component({
 	selector: 'app-rental-add',
@@ -26,30 +27,18 @@ export class RentalAddComponent implements OnInit, OnDestroy {
 	// Properties
 	hasError: boolean = false
 	private rentalSubscription!: Subscription
-	private bookSubscription!: Subscription
-	selectedBook!: Book
 
-	constructor(private rentalsService: RentalsService, private booksService: BooksService,private router: Router,private activatedRoute: ActivatedRoute){}
+	constructor(private rentalsService: RentalsService, private router: Router,private activatedRoute: ActivatedRoute){}
 
 	////////////////////////////////////////
 	// LifeCycle
 	ngOnInit(): void {
-		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
-		if(paramId){
-			// const id = parseInt(paramId)
-			// this.bookSubscription = this.booksService.getBook(id).subscribe({
-			// 	next: (data) => { this.selectedBook = data },
-			// 	error: (err) => {  }
-			// })
-		}
 		
 	}
 
 	ngOnDestroy(): void{
 		if(this.rentalSubscription)
 			this.rentalSubscription.unsubscribe()
-		if(this.bookSubscription)
-			this.bookSubscription.unsubscribe()
 	}
 
 	////////////////////////////////////////
