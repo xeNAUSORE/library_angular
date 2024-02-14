@@ -15,6 +15,7 @@ import { TitlePageComponent } from '../../../../shared/components/title-page/tit
 import { ErrorCardComponent } from '../../../../shared/components/error-card/error-card.component';
 import { SearchComponent } from '../../../../shared/components/search/search.component';
 import { ModalConfirmDeleteComponent } from '../../../../shared/components/modal-confirm-delete/modal-confirm-delete.component';
+import { EmptyResultCardComponent } from '../../../../shared/components/empty-result-card/empty-result-card.component';
 //Model
 import { Author } from '../../../../shared/models/author';
 //Services
@@ -23,38 +24,21 @@ import { AuthorsService } from '../../../../core/services/author/authors.service
 import { SearchPipe } from '../../../../shared/pipes/search.pipe';
 
 
+
 @Component({
 	selector: 'app-author-list',
 	standalone: true,
-	imports: [TitlePageComponent, SearchComponent, SearchPipe, ErrorCardComponent, MatCardModule, MatListModule, RouterLink, NgFor,NgIf, MatButtonModule, MatIconModule, MatChipsModule],
+	imports: [TitlePageComponent, EmptyResultCardComponent, SearchComponent, SearchPipe, ErrorCardComponent, MatCardModule, MatListModule, RouterLink, NgFor,NgIf, MatButtonModule, MatIconModule, MatChipsModule],
 	templateUrl: './author-list.component.html',
 	styleUrl: './author-list.component.scss'
 })
 export class AuthorListComponent implements OnInit, OnDestroy{
 	////////////////////////////////////////
 	// Properties
+	isDataLoaded = false
 	hasError: boolean = false
 	searchText: string = ''
-	authors: Author[] = [
-		{
-			id:1,
-			firstname:'Stephen',
-			lastname: 'King',
-			mail: 'stephenking@gmail.com',
-			phone: '',
-			books: [
-				{ 
-					id:1, 
-					title:'Star wars', 
-					description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum, erat non gravida faucibus, diam nisl aliquam quam, eu lacinia elit purus nec eros. Proin eget vulputate lectus.',
-					author: null,
-					rentals: null,
-					domain:null
-				}
-			]
-		},
-		
-	]
+	authors!: Author[] 
 	private authorSubscription!: Subscription
 
 	constructor(private authorsService: AuthorsService, private dialog: MatDialog){}
@@ -62,7 +46,13 @@ export class AuthorListComponent implements OnInit, OnDestroy{
 	////////////////////////////////////////
 	// LifeCycle
 	ngOnInit(): void {
-		//this.authorSubscription = this.authorsService.getAutorList().subscribe(v => this.autors = v)
+		this.authorSubscription = this.authorsService.getAuthorList().subscribe({
+			next: (data) => { 
+				this.authors = data
+				this.isDataLoaded = true
+			 },
+			error: (err) => { this.hasError = true }
+		})
 	}
 	ngOnDestroy(): void{
 		if(this.authorSubscription)
@@ -73,7 +63,9 @@ export class AuthorListComponent implements OnInit, OnDestroy{
 	// Méthode delete de domain 
 	deleteAuthor(id: number){
 		this.authorSubscription = this.authorsService.deleteAuthor(id).subscribe({
-			next: (data) => {  },
+			next: (data) => { 
+				this.authors = this.authors.filter(a => a.id != id)
+			 },
 			error: (err) => { this.hasError = true }
 		})
 	}

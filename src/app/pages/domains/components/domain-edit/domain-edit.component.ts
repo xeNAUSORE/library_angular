@@ -22,11 +22,13 @@ import { Domain } from '../../../../shared/models/domain';
 export class DomainEditComponent implements OnInit, OnDestroy {
 	////////////////////////////////////////
 	// Properties
+	isDataLoaded: boolean = false
 	hasError: boolean = false
+	
 	private domainSubscription!: Subscription
 	//pour test sans API
-	domain: Domain = { id:1, name:'test', description:'description', books:null}
-	
+	domain!: Domain	
+
 	constructor(private domainsService: DomainsService, private router: Router, private activatedRoute: ActivatedRoute){}
 
 	////////////////////////////////////////
@@ -36,11 +38,14 @@ export class DomainEditComponent implements OnInit, OnDestroy {
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
 		if(paramId == null) this.router.navigateByUrl('/domains')
 		else {
-			// const id = parseInt(paramId)
-			// this.domainSubscription = this.domainsService.getDomain(id).subscribe({
-			// 	next: (data) => {  },
-			// 	error: (err) => { this.router.navigateByUrl('/domains') }
-			// })
+			const id = parseInt(paramId)
+			this.domainSubscription = this.domainsService.getDomain(id).subscribe({
+				next: (data) => { 
+					this.domain = data 
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/domains') }
+			})
 		}
 	}
 	ngOnDestroy(): void{

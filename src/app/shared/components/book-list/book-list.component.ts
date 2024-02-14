@@ -20,11 +20,13 @@ import { ModalConfirmDeleteComponent } from '../modal-confirm-delete/modal-confi
 import { BooksService } from '../../../core/services/book/books.service';
 //Pipe
 import { SearchPipe } from '../../pipes/search.pipe';
+//component
+import { EmptyResultCardComponent } from '../empty-result-card/empty-result-card.component';
 
 @Component({
 	selector: 'app-book-list',
 	standalone: true,
-	imports: [SearchComponent, ErrorCardComponent, SearchPipe, MatCardModule, MatListModule, RouterLink, NgFor,NgIf, MatButtonModule, MatIconModule, MatChipsModule],
+	imports: [SearchComponent, EmptyResultCardComponent, ErrorCardComponent, SearchPipe, MatCardModule, MatListModule, RouterLink, NgFor,NgIf, MatButtonModule, MatIconModule, MatChipsModule],
 	templateUrl: './book-list.component.html',
 	styleUrl: './book-list.component.scss'
 })

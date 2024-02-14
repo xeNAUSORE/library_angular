@@ -28,22 +28,9 @@ import { DomainsService } from '../../../../core/services/domain/domains.service
 export class DomainViewComponent implements OnDestroy, OnInit {
 	////////////////////////////////////////
 	// Properties
-	domain: Domain = {
-		id:1,
-		name:'Science fiction',
-		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum, erat non gravida faucibus, diam nisl aliquam quam, eu lacinia elit purus nec eros. Proin eget vulputate lectus.',
-		books: [
-			{ 
-				id:1, 
-				title:'Star wars', 
-				description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum, erat non gravida faucibus, diam nisl aliquam quam, eu lacinia elit purus nec eros. Proin eget vulputate lectus.',
-				author: { id:1, firstname:'Stephen', lastname:'King', mail:'', phone:'', books:null },
-				rentals: null,
-				domain: { id:1, name:'Science fiction', description:'', books:null}
-			}
-		]
-	}
-	domainBooks: Book[] = this.domain.books ?? []
+	isDataloaded: boolean = false
+	domain!: Domain 
+	domainBooks: Book[] = this.domain?.books ?? []
 	
 	private domainSubscription!: Subscription
 
@@ -56,11 +43,14 @@ export class DomainViewComponent implements OnDestroy, OnInit {
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
 		if(paramId == null) this.router.navigateByUrl('/domains')
 		else {
-			// const id = parseInt(paramId)
-			// this.domainSubscription = this.domainsService.getDomain(id).subscribe({
-			// 	next: (data) => { this.router.navigateByUrl('/domains') },
-			// 	error: (err) => { this.router.navigateByUrl('/domains') }
-			// })
+			const id = parseInt(paramId)
+			this.domainSubscription = this.domainsService.getDomain(id).subscribe({
+				next: (data) => { 
+					this.domain = data
+					this.isDataloaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/domains') }
+			})
 		}
 	}
 	ngOnDestroy(): void{

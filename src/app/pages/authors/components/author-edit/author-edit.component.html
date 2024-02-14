@@ -1,6 +1,8 @@
-<!-- Title page component -->
-<app-title-page title="Modifier  l'auteur: {{ author.firstname }} {{ author.lastname }}" ></app-title-page>
-<!-- Error card component -->
-<app-error-card *ngIf="hasError"></app-error-card>
-<!-- Form Component -->
-<app-author-form (newAuthorEvent)="editAuthor($event)" [author]="author"></app-author-form>
+<div *ngIf="isDataLoaded">
+    <!-- Title page component -->
+    <app-title-page title="Modifier  l'auteur: {{ author.firstname }} {{ author.lastname }}" ></app-title-page>
+    <!-- Error card component -->
+    <app-error-card *ngIf="hasError"></app-error-card>
+    <!-- Form Component -->
+    <app-author-form (newAuthorEvent)="editAuthor($event)" [author]="author"></app-author-form>
+</div>

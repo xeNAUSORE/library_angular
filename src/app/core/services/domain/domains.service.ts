@@ -20,6 +20,6 @@ export class DomainsService {
 	}
 	getDomain(id: number): Observable<Domain> { return this.http.get<Domain>(`${this.baseUrl}/domains/${id}`) }
 	createDomain(domain: Domain): Observable<Domain> { return this.http.post<Domain>(`${this.baseUrl}/domains`, domain) }
-	editDomain(domain: Domain): Observable<Domain> { return this.http.put<Domain>(`${this.baseUrl}/domains`, domain) }
+	editDomain(domain: Domain): Observable<Domain> { return this.http.put<Domain>(`${this.baseUrl}/domains/${domain.id}`, domain) }
 	deleteDomain(id: number): Observable<boolean> { return this.http.delete<boolean>(`${this.baseUrl}/domains/${id}`) }
 }

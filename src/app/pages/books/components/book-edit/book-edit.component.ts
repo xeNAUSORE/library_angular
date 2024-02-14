@@ -30,7 +30,7 @@ export class BookEditComponent implements OnInit, OnDestroy {
 	book: Book = { 
 		id:1, title:'ça', 
 		description:'ça ça ça', 
-		author: { id:1, firstname:'stephen', lastname:'king', mail:'', phone:'', books:null },
+		author: { id:1, firstname:'stephen', lastname:'king',email:'', grade:'', phone:'', books:null },
 		domain: { id:1, name:'Science fiction', description:'', books:null },
 		rentals: null
 	}

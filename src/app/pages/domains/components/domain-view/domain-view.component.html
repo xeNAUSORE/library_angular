@@ -1,25 +1,28 @@
-<!-- Title page component -->
-<app-title-page title="Domaine: {{domain.name}}"></app-title-page>
+<div *ngIf="isDataloaded">
+    <!-- Title page component -->
+    <app-title-page title="Domaine: {{domain.name}}"></app-title-page>
 
-<!-- Domain View-->
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>{{domain.name}}</mat-card-title>
-    </mat-card-header>
+    <!-- Domain View-->
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{domain.name}}</mat-card-title>
+        </mat-card-header>
 
-    <mat-card-content class="card-content">
-        <p>{{domain.description}}</p>
-    </mat-card-content>
+        <mat-card-content class="card-content">
+            <p>{{domain.description}}</p>
+        </mat-card-content>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <mat-card-actions align="end" class="card-actions">  
-        <a mat-raised-button color="primary" routerLink="/domains/edit/{{domain.id}}">Editer</a>
-    </mat-card-actions>
-</mat-card>
+        <mat-card-actions align="end" class="card-actions">  
+            <a mat-raised-button color="primary" routerLink="/domains/edit/{{domain.id}}">Editer</a>
+        </mat-card-actions>
+    </mat-card>
 
-<!-- Title page component -->
-<app-title-page title="Liste des livres du domaine"></app-title-page>
+    <!-- Title page component -->
+    <app-title-page title="Liste des livres du domaine"></app-title-page>
 
-<!-- Book list component-->
-<app-book-list *ngIf="domainBooks.length > 0" [books]="domainBooks"></app-book-list>
+    <!-- Book list component-->
+    <app-book-list  [books]="domainBooks" addLink="/domains/add"></app-book-list>
+
+</div>

@@ -45,7 +45,8 @@ export class AuthorFormComponent implements OnInit, OnDestroy {
 			]),
 			phone: new FormControl('', [
 				Validators.pattern(/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/)
-			])
+			]),
+			grade: new FormControl('')
 		});
 
 		//set un domaine est passer en param du component (edit)
@@ -53,8 +54,9 @@ export class AuthorFormComponent implements OnInit, OnDestroy {
 			this.authorForm.setValue({ 
 				firstname: this.author.firstname, 
 				lastname: this.author.lastname,
-				mail: this.author.mail,
-				phone: this.author.phone
+				mail: this.author.email,
+				phone: this.author.phone,
+				grade: this.author.grade
 			})
 	}
 
@@ -77,6 +79,10 @@ export class AuthorFormComponent implements OnInit, OnDestroy {
 	get phone(){
 		return this.authorForm.get('phone')
 	}
+	get grade(){
+		return this.authorForm.get('grade')
+	}
+
 
 	///////////////////////////////////////
 	// Méthode submit du formulaire
@@ -85,10 +91,11 @@ export class AuthorFormComponent implements OnInit, OnDestroy {
 		if(this.author) a = { id:this.author.id }
 		a = { 
 			...a, 
-			firstname: this.authorForm.get('firstname'), 
-			lastname: this.authorForm.get('lastname'),
-			mail: this.authorForm.get('mail'),
-			phone: this.authorForm.get('phone')
+			firstname: this.authorForm.get('firstname')?.value, 
+			lastname: this.authorForm.get('lastname')?.value,
+			email: this.authorForm.get('mail')?.value,
+			phone: this.authorForm.get('phone')?.value,
+			grade: this.authorForm.get('grade')?.value
 		}
 
 		//Emit l'objet au component parent

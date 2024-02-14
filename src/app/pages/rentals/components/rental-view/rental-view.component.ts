@@ -37,7 +37,7 @@ export class RentalViewComponent implements OnDestroy, OnInit {
 			id:1,
 			firstname:'Xen',
 			lastname: 'Ausore',
-			mail: 'xenausore@gmail.com',
+			email: 'xenausore@gmail.com',
 			phone: '0102030405',
 			address: { 
 				id:1, 
@@ -54,7 +54,7 @@ export class RentalViewComponent implements OnDestroy, OnInit {
 			id:1, 
 			title:"ça", 
 			description:'', 
-			author: { id:1, firstname:'Stephen', lastname:'King', mail:'', phone:'', books:null },
+			author: { id:1, firstname:'Stephen', lastname:'King', email:'', grade:'', phone:'', books:null },
 			domain: { id:1, name:'Science Fiction', description:'', books:null} ,
 			rentals: null
 		} ,

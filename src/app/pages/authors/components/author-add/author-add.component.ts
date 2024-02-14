@@ -39,7 +39,7 @@ export class AuthorAddComponent implements OnDestroy {
 	addAuthor(author: any){
 		this.authorSubscription = this.authorsService.createAuthor(author).subscribe({
 			next: (data) => { this.router.navigateByUrl('/authors') },
-			error: (err) => { this.hasError = true }
+			error: (err) => { console.log(err);this.hasError = true }
 		})
 	}
 }

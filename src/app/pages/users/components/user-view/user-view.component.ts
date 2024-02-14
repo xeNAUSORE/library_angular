@@ -17,6 +17,7 @@ import { User } from '../../../../shared/models/user';
 import { Rental } from '../../../../shared/models/rental';
 //Services
 import { UsersService } from '../../../../core/services/users/users.service';
+import { LoginComponent } from '../../../authentication/components/login/login.component';
 
 @Component({
 	selector: 'app-user-view',
@@ -25,57 +26,13 @@ import { UsersService } from '../../../../core/services/users/users.service';
 	templateUrl: './user-view.component.html',
 	styleUrl: './user-view.component.scss'
 })
+
 export class UserViewComponent implements OnDestroy, OnInit {
 	////////////////////////////////////////
 	// Properties
-	user: User = { 
-		id:1, 
-		firstname:'xen',
-		lastname:'ausore',
-		mail:'xenausore@gmail.com', phone:'0102030405', 
-		address: {
-			id: 1,
-			number: 12,
-			street: 'rue du château',
-			apt: '',
-			city: 'Nantes',
-			country: 'France',
-			zip: '44000'
-		} ,
-		rentals: [
-			{ 
-				id:1, 
-				user: {
-					id:1,
-					firstname:'Xen',
-					lastname: 'Ausore',
-					mail: 'xenausore@gmail.com',
-					phone: '0102030405',
-					address: { 
-						id:1, 
-						number:12, 
-						street:'Rue du château',
-						apt: '',
-						city: 'Nantes',
-						zip:'44000',
-						country: 'France'
-					},
-					rentals: null
-				},
-				book: { 
-					id:1, 
-					title:"ça", 
-					description:'', 
-					author: { id:1, firstname:'Stephen', lastname:'King', mail:'', phone:'', books:null },
-					domain: { id:1, name:'Science Fiction', description:'', books:null} ,
-					rentals: null
-				} ,
-				rentAt: new Date(),
-				returnAt: null
-			}
-		]
-	}
-	userRentals: Rental[] = this.user.rentals ?? []
+	isDataLoaded: boolean = false
+	user!: User 
+	userRentals!: Rental[]
 	
 	private userSubscription!: Subscription
 
@@ -88,11 +45,17 @@ export class UserViewComponent implements OnDestroy, OnInit {
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
 		if(paramId == null) this.router.navigateByUrl('/users')
 		else {
-			// const id = parseInt(paramId)
-			// this.authorSubscription = this.usersService.getUser(id).subscribe({
-			// 	next: (data) => { this.user = data },
-			// 	error: (err) => { this.router.navigateByUrl('/users') }
-			// })
+			const id = parseInt(paramId)
+			this.userSubscription = this.usersService.getUser(id).subscribe({
+				next: (data) => { 
+					console.log(data);
+					
+					this.user = data 
+					// this.userRentals = data.rentals ?? []
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/users') }
+			})
 		}
 	}
 	ngOnDestroy(): void{

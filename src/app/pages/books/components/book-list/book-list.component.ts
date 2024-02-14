@@ -26,7 +26,7 @@ export class PageBookListComponent implements OnInit, OnDestroy{
 			id:1, 
 			title:"ça", 
 			description:'', 
-			author: { id:1, firstname:'Stephen', lastname:'King', mail:'', phone:'', books:null },
+			author: { id:1, firstname:'Stephen', lastname:'King',email:'', grade:'', phone:'', books:null },
 			domain: { id:1, name:'Science Fiction', description:'', books:null} ,
 			rentals: null
 		}
