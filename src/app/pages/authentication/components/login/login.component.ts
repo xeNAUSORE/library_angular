@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				this.authService.setAuthenticatedRefresh(true)
 				this.router.navigateByUrl('')
 			},
-			error: (err) => { this.hasError = true }
+			error: (err) => { console.log(err); this.hasError = true }
 		})
 	}
 }
