@@ -23,6 +23,7 @@ import { User } from '../../../../shared/models/user';
 export class UserEditComponent implements OnInit, OnDestroy {
 	////////////////////////////////////////
 	// Properties
+	isDataLoaded: boolean = false
 	hasError: boolean = false
 	private userSubscription!: Subscription
 	//pour test sans API
@@ -35,13 +36,16 @@ export class UserEditComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		//Get l'id en parametre de l'url
 		const paramId = this.activatedRoute.snapshot.paramMap.get('id')
-		if(paramId == null) this.router.navigateByUrl('/domains')
+		if(paramId == null) this.router.navigateByUrl('/users')
 		else {
-			// const id = parseInt(paramId)
-			// this.userSubscription = this.usersService.getUser(id).subscribe({
-			// 	next: (data) => { this.user = data  },
-			// 	error: (err) => { this.router.navigateByUrl('/domains') }
-			// })
+			const id = parseInt(paramId)
+			this.userSubscription = this.usersService.getUser(id).subscribe({
+				next: (data) => { 
+					this.user = data  
+					this.isDataLoaded = true
+				},
+				error: (err) => { this.router.navigateByUrl('/users') }
+			})
 		}
 	}
 	ngOnDestroy(): void{
