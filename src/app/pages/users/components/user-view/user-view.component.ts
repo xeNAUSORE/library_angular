@@ -49,7 +49,7 @@ export class UserViewComponent implements OnDestroy, OnInit {
 			this.userSubscription = this.usersService.getUser(id).subscribe({
 				next: (data) => { 
 					this.user = data 
-					// this.userRentals = data.rentals ?? []
+					this.userRentals = data.rentals ?? []
 					this.isDataLoaded = true
 				},
 				error: (err) => { this.router.navigateByUrl('/users') }
