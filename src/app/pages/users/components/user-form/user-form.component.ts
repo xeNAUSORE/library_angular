@@ -72,7 +72,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			this.userForm.setValue({ 
 				firstname: this.user.firstname, 
 				lastname: this.user.lastname,
-				mail: this.user.mail,
+				mail: this.user.email,
 				phone: this.user.phone,
 				number: this.user.address.number,
 				street: this.user.address.street,
@@ -132,20 +132,20 @@ export class UserFormComponent implements OnInit, OnDestroy {
 		}
 		u = { 
 			...u, 
-			firstname: this.userForm.get('firstname'), 
-			lastname: this.userForm.get('lastname'),
-			mail: this.userForm.get('mail'),
-			phone: this.userForm.get('phone'),
+			firstname: this.userForm.get('firstname')?.value, 
+			lastname: this.userForm.get('lastname')?.value,
+			email: this.userForm.get('mail')?.value,
+			phone: this.userForm.get('phone')?.value,
 			address: {
 				...address,
-				number: this.userForm.get('number'),
-				street: this.userForm.get('street'),
-				apt: this.userForm.get('apt'),
-				city: this.userForm.get('city'),
-				zip: this.userForm.get('zip'),
-				country: this.userForm.get('country'),
+				number: this.userForm.get('number')?.value,
+				street: this.userForm.get('street')?.value,
+				apt: this.userForm.get('apt')?.value,
+				city: this.userForm.get('city')?.value,
+				zip: this.userForm.get('zip')?.value,
+				country: this.userForm.get('country')?.value,
 			}
-		}
+		}		
 		
 		//Emit l'objet au component parent
 		this.newUserEvent.emit(u)

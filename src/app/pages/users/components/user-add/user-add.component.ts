@@ -39,7 +39,7 @@ export class UserAddComponent implements OnDestroy {
 	addUser(user: any){
 		this.userSubscription = this.usersService.createUser(user).subscribe({
 			next: (data) => { this.router.navigateByUrl('/users') },
-			error: (err) => { this.hasError = true }
+			error: (err) => { this.hasError = true } 
 		})
 	}
 }
