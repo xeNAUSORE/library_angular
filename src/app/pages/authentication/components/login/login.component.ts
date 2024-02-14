@@ -64,20 +64,27 @@ export class LoginComponent implements OnInit, OnDestroy {
 	////////////////////////////////////////
 	// Méthode submit du formulaire
 	onSubmit() {
-		const user: any = { password: this.authForm.get('password'), username:this.authForm.get('username') }
+		const user: any = { 
+			password: this.authForm.get('password')?.value, 
+			email:this.authForm.get('username')?.value, 
+			phone:'', 
+			firstname:'', 
+			lastname:'',  
+		}
 		//pour test sans api
-		localStorage.setItem('authenticatedUser', user)
-		this.authService.setAuthenticatedRefresh(true)
-		this.router.navigateByUrl('')
+		// localStorage.setItem('authenticatedUser', user)
+		// this.authService.setAuthenticatedRefresh(true)
+		// this.router.navigateByUrl('')
 
 		
-		//this.authSubscription = this.authService.login(user).subscribe({
-		// 	next: (data) => { 
-		// 		localStorage.setItem('authenticatedUser', JSON.stringify(data))
-		// 		this.authService.setAuthenticatedRefresh(true)
-		// 		this.router.navigateByUrl('')
-		// 	},
-		// 	error: (err) => { this.hasError = true }
-		// })
+		this.authSubscription = this.authService.login(user).subscribe({
+			next: (data) => { 
+				console.log(data)
+				localStorage.setItem('authenticatedUser', JSON.stringify(data))
+				this.authService.setAuthenticatedRefresh(true)
+				this.router.navigateByUrl('')
+			},
+			error: (err) => { console.log(err); this.hasError = true }
+		})
 	}
 }
