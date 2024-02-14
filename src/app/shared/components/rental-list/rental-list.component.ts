@@ -45,6 +45,7 @@ export class RentalListComponent implements OnInit, OnDestroy {
 	////////////////////////////////////////
 	// LifeCycle
 	ngOnInit(): void {
+		console.log(this.rentals)
 	}
 	ngOnDestroy(): void{
 		if(this.rentalSubscription)

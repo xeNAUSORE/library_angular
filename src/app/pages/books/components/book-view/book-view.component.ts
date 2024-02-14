@@ -50,6 +50,8 @@ export class BookViewComponent implements OnDestroy, OnInit{
 				next: (data) => { 
 					this.book = data 
 					this.bookRentals = data.rentals ?? []
+			
+					console.log(this.bookRentals)
 					this.isDataLoaded = true
 				},
 				error: (err) => { this.router.navigateByUrl('/books') }

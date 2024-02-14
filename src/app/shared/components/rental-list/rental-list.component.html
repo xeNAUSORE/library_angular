@@ -16,7 +16,11 @@
                 <ng-template #hasResult>
                     <div class="list-item">
                         <div>
-                            <div><span>{{r.book.title}} |</span> {{r.lector.firstname}} {{r.lector.lastname}}</div>
+                            <div>
+                                <span *ngIf="r.book">{{r.book.title}}</span>
+                                <span *ngIf="r.book && r.lector"> |</span> 
+                                <span *ngIf="r.lector">{{r.lector.firstname}} {{r.lector.lastname}}</span>
+                            </div>
                             <div class="subtitle"><mat-icon>arrow_back</mat-icon>{{r.rentailDate | date:'dd/MM/YYYY'}} | 
                                 <mat-icon>arrow_forward</mat-icon>
                                 <span *ngIf="r.returnDate; else hasReturnDate">{{r.returnDate | date:'dd/MM/YYYY'}}</span>
