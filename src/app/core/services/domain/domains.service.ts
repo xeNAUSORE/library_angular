@@ -15,7 +15,9 @@ export class DomainsService {
 	constructor(private http: HttpClient, @Inject(BASE_API_URL) private baseUrl: string) {
 	}
 
-	getDomainList(): Observable<Domain[]> { return this.http.get<Domain[]>(`${this.baseUrl}/domains`) }
+	getDomainList(): Observable<Domain[]> { 
+		return this.http.get<Domain[]>(`${this.baseUrl}/domains`) 
+	}
 	getDomain(id: number): Observable<Domain> { return this.http.get<Domain>(`${this.baseUrl}/domains/${id}`) }
 	createDomain(domain: Domain): Observable<Domain> { return this.http.post<Domain>(`${this.baseUrl}/domains`, domain) }
 	editDomain(domain: Domain): Observable<Domain> { return this.http.put<Domain>(`${this.baseUrl}/domains`, domain) }

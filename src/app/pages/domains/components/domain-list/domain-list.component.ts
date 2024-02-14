@@ -74,7 +74,7 @@ export class DomainListComponent implements OnInit, OnDestroy{
 	////////////////////////////////////////
 	// LifeCycle
 	ngOnInit(): void {
-		//this.domainSubscription = this.domainsService.getDomainList().subscribe(v => this.domains = v)
+		this.domainSubscription = this.domainsService.getDomainList().subscribe(v => console.log(v))//this.domains = v)
 	}
 	ngOnDestroy(): void{
 		if(this.domainSubscription)
